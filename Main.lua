@@ -420,7 +420,11 @@ Holder.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Holder.BorderSizePixel = 0
 Holder.Position = UDim2.new(0.285203725, 0, 0.326767087, 0)
-Holder.Size = UDim2.new(0.235109717, 0, 0.0405561998, 0)
+if IsOnMobile then
+	Holder.Size = UDim2.new(0.4, 0, 0.0405561998, 0)
+else
+	Holder.Size = UDim2.new(0.235109717, 0, 0.0405561998, 0)
+end
 
 Title.Name = "Title"
 Title.Parent = Holder
@@ -952,8 +956,13 @@ CommandListHolder.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 CommandListHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
 CommandListHolder.BorderSizePixel = 0
 CommandListHolder.Position = UDim2.new(0.600000024, 0, 0.326999992, 0)
-CommandListHolder.Size = UDim2.new(0.235109717, 0, 0.0405561998, 0)
 CommandListHolder.Visible = false
+
+if IsOnMobile then
+	CommandListHolder.Size = UDim2.new(0.4, 0, 0.0405561998, 0)
+else
+	CommandListHolder.Size = UDim2.new(0.235109717, 0, 0.0405561998, 0)
+end
 
 Title_2.Name = "Title"
 Title_2.Parent = CommandListHolder
@@ -1150,8 +1159,13 @@ CommandBarHolder.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 CommandBarHolder.BorderColor3 = Color3.fromRGB(0, 0, 0)
 CommandBarHolder.BorderSizePixel = 0
 CommandBarHolder.Position = UDim2.new(0.436683059, 0, 0.0990730003, 0)
-CommandBarHolder.Size = UDim2.new(0.177638456, 0, 0.0405561998, 0)
 CommandBarHolder.Visible = false
+
+if IsOnMobile then
+	CommandBarHolder.Size = UDim2.new(0.25, 0, 0.0405561998, 0)
+else
+	CommandBarHolder.Size = UDim2.new(0.177638456, 0, 0.0405561998, 0)
+end
 
 Title_3.Name = "Title"
 Title_3.Parent = CommandBarHolder
