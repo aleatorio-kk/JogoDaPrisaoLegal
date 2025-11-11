@@ -2282,7 +2282,7 @@ AddCommand('clip',{'unnoclip'},function(speaker)
 	Notify("Noclip Disabled")
 end)
 
-AddCommand('goto',{'to'},function(args, speaker)
+AddCommand('goto',{'to'},function(speaker, args)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players)do
 		if Players[v].Character ~= nil then
