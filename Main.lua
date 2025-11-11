@@ -37,6 +37,13 @@ local plr = Players.LocalPlayer
 local char = plr.Character or plr.CharacterAdded:Wait()
 local mouse = plr:GetMouse()
 local camera = workspace.CurrentCamera
+local IsOnMobile
+
+if UserInputService.TouchEnabled then
+	IsOnMobile = true
+else
+	IsOnMobile = false
+end
 
 local Prefix = ";"
 local CloseBind = Enum.KeyCode.RightShift
@@ -409,7 +416,7 @@ local NotifyContentText = Instance.new("TextLabel")
 local NotUIStroke = Instance.new("UIStroke")
 local NHolderUIListLayout = Instance.new("UIListLayout")
 
-PrisonLife.Name = "Prison Life Breaker | Aleatoriokk Loves you"
+PrisonLife.Name = "Aleatoriokk | Prison Life"
 PrisonLife.Parent = parentupvr
 PrisonLife.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 PrisonLife.DisplayOrder = 999
@@ -1477,12 +1484,6 @@ CommandsButton.MouseButton1Click:Connect(function()
 	else
 		Notify("Command List closed.")
 	end
-end)
-
-xpcall(function()
-	IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
-end, function()
-	IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 end)
 
 function splitString(str,delim)
