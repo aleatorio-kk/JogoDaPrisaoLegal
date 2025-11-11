@@ -421,7 +421,7 @@ Holder.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Holder.BorderSizePixel = 0
 Holder.Position = UDim2.new(0.285203725, 0, 0.326767087, 0)
 if IsOnMobile then
-	Holder.Size = UDim2.new(0.4, 0, 0.0405561998, 0)
+	Holder.Size = UDim2.new(0.3, 0, 0.065, 0)
 else
 	Holder.Size = UDim2.new(0.235109717, 0, 0.0405561998, 0)
 end
@@ -959,7 +959,7 @@ CommandListHolder.Position = UDim2.new(0.600000024, 0, 0.326999992, 0)
 CommandListHolder.Visible = false
 
 if IsOnMobile then
-	CommandListHolder.Size = UDim2.new(0.4, 0, 0.0405561998, 0)
+	CommandListHolder.Size = UDim2.new(0.3, 0, 0.066, 0)
 else
 	CommandListHolder.Size = UDim2.new(0.235109717, 0, 0.0405561998, 0)
 end
@@ -1085,8 +1085,13 @@ CommandTip.BackgroundTransparency = 0.200
 CommandTip.BorderColor3 = Color3.fromRGB(0, 0, 0)
 CommandTip.BorderSizePixel = 0
 CommandTip.Position = UDim2.new(0.56277746, 0, 0.125144839, 0)
-CommandTip.Size = UDim2.new(0.180000007, 0, 0.189999998, 0)
 CommandTip.Visible = false
+
+if IsOnMobile then
+	CommandTip.Size = UDim2.new(0.26, 0, 0.26, 0)
+else
+	CommandTip.Size = UDim2.new(0.19, 0, 0.19, 0)
+end
 
 BeautifuTipUIStroke.Name = "BeautifuTipUIStroke"
 BeautifuTipUIStroke.Parent = CommandTip
@@ -1162,7 +1167,7 @@ CommandBarHolder.Position = UDim2.new(0.436683059, 0, 0.0990730003, 0)
 CommandBarHolder.Visible = false
 
 if IsOnMobile then
-	CommandBarHolder.Size = UDim2.new(0.25, 0, 0.0405561998, 0)
+	CommandBarHolder.Size = UDim2.new(0.25, 0, 0.066, 0)
 else
 	CommandBarHolder.Size = UDim2.new(0.177638456, 0, 0.0405561998, 0)
 end
