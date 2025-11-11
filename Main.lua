@@ -1,0 +1,2 @@
+-- Completamente Open Source
+-- Si divirta muitu
