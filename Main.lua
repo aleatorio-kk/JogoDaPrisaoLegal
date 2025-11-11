@@ -243,6 +243,7 @@ local Cmds = {
 	{Name = "cmds", Description = "Displays a list of available commands."},
 	{Name = "cmdbar", Description = "Enables the Command Bar UI."},
 	{Name = "getscript", Description = "Copies the script link to your clipboard."},
+	{Name = "hub", Description = "Makes the hub visible or not."},
 	{Name = "console", Description = "Opens the Developer Console."},
 	{Name = "dex", Description = "Opens the DEX (By Moon)."},
 	{Name = "remotespy", Description = "Opens Simple Spy V3."},
@@ -1700,6 +1701,10 @@ function PunchPlayer(Target)
 		end
 	end
 end
+
+AddCommand("hub", {"kk"}, function()
+	Holder.Visible = not Holder.Visible
+end)
 
 local killRender
 local coolconnectionaura
