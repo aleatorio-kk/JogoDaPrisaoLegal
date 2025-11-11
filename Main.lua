@@ -1373,7 +1373,11 @@ end)
 
 Close.MouseButton1Click:Connect(function()
 	Holder.Visible = false
-	Notify("Toggled UI. Press "..tostring(CloseBind.Name).." to toggle it again.")
+	if IsOnMobile then
+		Notify("Toggled UI. Use "..Prefix.."hub to toggle it again.")
+	else
+		Notify("Toggled UI. Press "..tostring(CloseBind.Name).." to toggle it again.")
+	end
 end)
 
 Min_2.MouseButton1Click:Connect(function()
