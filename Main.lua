@@ -1600,18 +1600,14 @@ end)
 everyClipboard = missing("function", setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set))
 
 function toClipboard(txt)
-	if RunService:IsStudio() then
-		print("Text copied to clipboard: " .. txt)
+	if everyClipboard then
+		everyClipboard(tostring(txt))
+		Notify("Copied to clipboard")
 	else
-		if everyClipboard then
-			everyClipboard(tostring(txt))
-			Notify("Copied to clipboard")
-		else
-			Notify("You executor does not support the function to copy to clipboard.")
-			task.wait(1.5)
-			Notify("Content has been printed to the console.")
-			print(tostring(txt))
-		end
+		Notify("You executor does not support the function to copy to clipboard.")
+		task.wait(1.5)
+		Notify("Content has been printed to the console.")
+		print(tostring(txt))
 	end
 end
 
@@ -1670,16 +1666,15 @@ function DoKAura(Size)
 end
 
 function PunchPlayer(Target)
-	if Target then
+	if Target:IsA("Player") then
 		if Target.Character then
-			if Target.Character:FindFirstChild("Humanoid") and getRoot(Target.Character) then
-				if Target.Character:FindFirstChild("Humanoid").Health > 0 then
-					if char and getRoot(char) and char:FindFirstChild("Humanoid") and char:FindFirstChild("Humanoid").Health > 0 then
-						local args = {
+			if Target.Character:FindFirstChild("Humanoid") then
+				if Target.Character.Humanoid.Health > 0 then
+					if Target.Character:FindFirstChild("HumanoidRootPart") then
+						local argssss = {
 							Target
 						}
-
-						ReplicatedStorage:WaitForChild("meleeEvent"):FireServer(unpack(args))
+						ReplicatedStorage:WaitForChild("meleeEvent"):FireServer(unpack(argssss))
 					end
 				end
 			end
@@ -1688,6 +1683,7 @@ function PunchPlayer(Target)
 end
 
 local killRender
+local coolconnectionaura
 
 AddCommand("killaura", {"aura"}, function(speaker)
 	if speaker then
@@ -1697,6 +1693,10 @@ AddCommand("killaura", {"aura"}, function(speaker)
 
 		if killRender then
 			killRender:Disconnect()
+		end
+
+		if coolconnectionaura then
+			coolconnectionaura:Disconnect()
 		end
 
 		local AuraBlock = DoKAura(KASize)
@@ -1709,23 +1709,23 @@ AddCommand("killaura", {"aura"}, function(speaker)
 					AuraBlock.CFrame = Root.CFrame
 				end
 			end
-
-			AuraBlock.Touched:Connect(function(basepart)
-				if basepart:IsA("BasePart") then
-					if Players:GetPlayerFromCharacter(basepart.Parent) then
-						local player = Players:GetPlayerFromCharacter(basepart.Parent)
-						if player then
-							if player ~= speaker then
-								if getRoot(player.Character) and getRoot(plr.Character) then
-									if player.Character:FindFirstChild("Humanoid") and player.Character:FindFirstChild("Humanoid").Health > 0 then
-										PunchPlayer(player)
-									end
+		end)
+		
+		coolconnectionaura = AuraBlock.Touched:Connect(function(basepart)
+			if basepart:IsA("BasePart") then
+				if Players:GetPlayerFromCharacter(basepart.Parent) then
+					local player = Players:GetPlayerFromCharacter(basepart.Parent)
+					if player then
+						if player ~= speaker then
+							if getRoot(player.Character) and getRoot(plr.Character) then
+								if player.Character:FindFirstChild("Humanoid") and player.Character:FindFirstChild("Humanoid").Health > 0 then
+									PunchPlayer(player)
 								end
 							end
 						end
 					end
 				end
-			end)
+			end
 		end)
 	end
 end)
@@ -1745,6 +1745,10 @@ AddCommand("aurareload", {"reloadaura", "reaura"}, function(speaker)
 			killRender:Disconnect()
 			workspace:WaitForChild("TotallyNotWeirdCompletelyNormalBlockPart"):Destroy()
 		end
+		
+		if coolconnectionaura then
+			coolconnectionaura:Disconnect()
+		end
 
 		task.wait(1)
 
@@ -1762,23 +1766,23 @@ AddCommand("aurareload", {"reloadaura", "reaura"}, function(speaker)
 					AuraBlock.CFrame = getRoot(speaker.Character).CFrame * CFrame.new(0, 1.5, 0)
 				end
 			end
-
-			AuraBlock.Touched:Connect(function(basepart)
-				if basepart:IsA("BasePart") then
-					if Players:GetPlayerFromCharacter(basepart.Parent) then
-						local player = Players:GetPlayerFromCharacter(basepart.Parent)
-						if player then
-							if player ~= speaker then
-								if getRoot(player.Character) and getRoot(plr.Character) then
-									if player.Character:FindFirstChild("Humanoid") and player.Character:FindFirstChild("Humanoid").Health > 0 then
-										PunchPlayer(player)
-									end
+		end)
+		
+		coolconnectionaura = AuraBlock.Touched:Connect(function(basepart)
+			if basepart:IsA("BasePart") then
+				if Players:GetPlayerFromCharacter(basepart.Parent) then
+					local player = Players:GetPlayerFromCharacter(basepart.Parent)
+					if player then
+						if player ~= speaker then
+							if getRoot(player.Character) and getRoot(plr.Character) then
+								if player.Character:FindFirstChild("Humanoid") and player.Character:FindFirstChild("Humanoid").Health > 0 then
+									PunchPlayer(player)
 								end
 							end
 						end
 					end
 				end
-			end)
+			end
 		end)
 
 		Notify("Kill Aura reloaded.")
