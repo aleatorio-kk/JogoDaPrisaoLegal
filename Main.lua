@@ -2486,7 +2486,7 @@ AddCommand("kill", {}, function(speaker, args)
 									loopu = RunService.RenderStepped:Connect(function()
 										getRoot(char).CFrame = getRoot(targetPlayer.Character).CFrame
 									end)
-									repeat wait() PunchPlayer(target) until humanoid.Health <= 0 or not loopu
+									repeat wait() PunchPlayer(targetPlayer) until humanoid.Health <= 0 or not loopu
 									if loopu then
 										loopu:Disconnect()
 									end
