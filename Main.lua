@@ -2550,6 +2550,62 @@ AddCommand("cells", {}, function()
 	tpplayertopos(CFrame.new(917, 100, 2448))
 end)
 
+local giver = workspace:WaitForChild("Prison_ITEMS"):WaitForChild("giver")
+local ak = giver:WaitForChild("AK-47"):WaitForChild("Meshes/AK47_7")
+local remington = giver:WaitForChild("Remington 870"):WaitForChild("Meshes/r870_2")
+local m9 = giver:WaitForChild("M9"):WaitForChild("Meshes/M9_3")
+
+function GetItem(Item)
+	local Remotes = ReplicatedStorage:WaitForChild("Remotes")
+	local InteractWithItem_upvr = Remotes.InteractWithItem
+	
+	local iten
+	
+	if Item == "ak" then
+		iten = ak
+	elseif Item == "remington" then
+		iten = remington
+	elseif Item == "m9" then
+		iten = m9
+	end
+	
+	local Args = {
+		iten
+	}
+	
+	InteractWithItem_upvr:InvokeServer(unpack(Args))
+end
+
+AddCommand("ak", {"ak47"}, function()
+	local gunpos = ak.CFrame.Position
+	local plrpos = getRoot(plr.Character).CFrame.Position
+	tpplayertopos(gunpos)
+	wait(.05)
+	GetItem("ak")
+	wait(.05)
+	tpplayertopos(CFrame.new(plrpos))
+end)
+
+AddCommand("remington", {"shotgun", "remington870"}, function()
+	local gunpos = remington.CFrame.Position
+	local plrpos = getRoot(plr.Character).CFrame.Position
+	tpplayertopos(gunpos)
+	wait(.05)
+	GetItem("remington")
+	wait(.05)
+	tpplayertopos(CFrame.new(plrpos))
+end)
+
+AddCommand("m9", {"pistol"}, function()
+	local gunpos = m9.CFrame.Position
+	local plrpos = getRoot(plr.Character).CFrame.Position
+	tpplayertopos(gunpos)
+	wait(.05)
+	GetItem("m9")
+	wait(.05)
+	tpplayertopos(CFrame.new(plrpos))
+end)
+
 plr.Chatted:Connect(function(message)
 	local args = string.split(message, " ")
 	local commandname = args[1]:lower()
