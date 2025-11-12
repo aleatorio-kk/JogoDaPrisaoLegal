@@ -1,9 +1,11 @@
 --[[
 Todos os direitos reservados. ©aleatoriokk - GitHub do Proprietário Original: github.com/aleatorio-kk
 Não é permitido a republicação do mesmo.
+Sinta-se livre para utilizar ou pegar partes do código source original, mas NÃO republique o source como se ele fosse de sua autoria ou domínio.
 
 All rights reserved. ©aleatoriokk - Official Owner GitHub: github.com/aleatorio-kk
 No repost allowed.
+Feel free to take some parts from the source, but DON'T repost by impersonating this script is yours.
 ]]
 
 -- Completamente Open Source
