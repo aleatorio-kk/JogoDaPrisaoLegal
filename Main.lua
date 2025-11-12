@@ -2092,6 +2092,10 @@ local mobilefly = function(speaker, vfly)
 end
 
 local respawnatlastposition = true
+local antiarrest = true
+local antitaser = true
+local CFW = true
+local ASBP = true
 
 local lastDeath
 local lastCam
@@ -2457,6 +2461,39 @@ AddCommand("cmdbar", {"commandbar", "cbar"}, function()
 	end
 end)
 
+local loopu
+AddCommand("kill", {}, function(speaker, args)
+	if not loopu then
+		local target = args[1]
+		if target then
+			local targetPlayer = game.Players:FindFirstChild(target)
+			if targetPlayer and targetPlayer.Character then
+				local humanoid = targetPlayer.Character:FindFirstChildOfClass("Humanoid")
+				if humanoid then
+					if humanoid.Health > 0 then
+						if char then
+							if char:FindFirstChild("Humanoid") then
+								if char:FindFirstChild("Humanoid").Health > 0 then
+									loopu = RunService.RenderStepped:Connect(function()
+										getRoot(char).CFrame = getRoot(targetPlayer.Character).CFrame
+									end)
+									repeat wait() PunchPlayer(target) until humanoid.Health <= 0 or not loopu
+									if loopu then
+										loopu:Disconnect()
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	else
+		loopu:Disconnect()
+		loopu = nil
+	end
+end)
+
 plr.Chatted:Connect(function(message)
 	local args = string.split(message, " ")
 	local commandname = args[1]:lower()
@@ -2618,6 +2655,118 @@ task.spawn(function()
 			end
 		end,
 	})
+	
+	local function BuildAgainArrest()
+		ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("ClientArrested").OnClientEvent:connect(function()
+			local humanoid = char:WaitForChild("Humanoid")
+			if humanoid then
+				local anim = Instance.new("Animation")
+				anim.AnimationId = "rbxassetid://287112271"
+				local animationarrested = humanoid:LoadAnimation(anim)
+
+				StarterGui:SetCore("ResetButtonCallback", false)		
+				plr:SetAttribute("BackpackEnabled", false)
+
+				humanoid:UnequipTools()
+				humanoid.WalkSpeed = 0
+				humanoid.JumpHeight = 0
+				animationarrested:Play()
+			end
+		end)
+	end
+	
+	local AntiArrest = CreateToggle({
+		Name = "Anti Arrest",
+		Default = true,
+		Callback = function(Value)
+			if Value then
+				antiarrest = true
+				Notify("Anti Arrest Enabled.")
+			else
+				antiarrest = false
+				BuildAgainArrest()
+				Notify("Anti Arrest Disabled.")
+			end
+		end,
+	})
+	
+	local function BuildTaserAgain()
+		ReplicatedStorage:WaitForChild("GunRemotes"):WaitForChild("PlayerTased").OnClientEvent:connect(function()
+			local humanoid = char:WaitForChild("Humanoid")
+			if humanoid then
+				local anim = Instance.new("Animation")
+				anim.AnimationId = "rbxassetid://279227693"
+				local Animation = Instance.new("Animation")
+				Animation.AnimationId = "rbxassetid://279229192"
+				local animtaser = humanoid:LoadAnimation(anim)
+				local animend = humanoid:LoadAnimation(Animation)
+				plr:SetAttribute("BackpackEnabled", false)
+				StarterGui:SetCore("ResetButtonCallback", false)	
+				humanoid:UnequipTools()
+				humanoid.WalkSpeed = 0
+				humanoid.JumpHeight = 0
+				anim:Play()
+				anim.KeyframeReached:Connect(function(key)
+					if key == "finish" then
+						anim:Stop()
+						animend:Play()
+					end
+				end)
+				task.wait(3.5)
+				anim:Stop()
+				animend:Stop()
+				if char then
+					plr:SetAttribute("BackpackEnabled", true)
+					StarterGui:SetCore("ResetButtonCallback", true)	
+					humanoid.WalkSpeed = 16
+					humanoid.JumpHeight = 5.5
+				end
+			end
+		end)
+	end
+	
+	local AntiTaser = CreateToggle({
+		Name = "Anti Taser",
+		Default = true,
+		Callback = function(Value)
+			if Value then
+				antitaser = true
+				Notify("Anti Taser Enabled.")
+			else
+				antitaser = false
+				BuildTaserAgain()
+				Notify("Anti Taser Disabled.")
+			end
+		end,
+	})
+	
+	local NoSlowdown = CreateToggle({
+		Name = "Crouch Fast Walk",
+		Default = true,
+		Callback = function(Value)
+			if Value then
+				CFW = true
+				Notify("Crouch Fast Walk Enabled.")
+			else
+				CFW = false
+				Notify("Crouch Fast Walk Disabled.")
+			end
+		end,
+	})
+	
+	local BPAlways = CreateToggle({
+		Name = "Always Show Backpack",
+		Default = true,
+		Callback = function(Value)
+			if Value then
+				ASBP = true
+				Notify("Always Show Backpack Enabled.")
+			else
+				ASBP = false
+				Notify("Always Show Backpack Disabled.")
+			end
+		end,
+	})
 end)
 
 RunService.RenderStepped:Connect(function()
@@ -2658,6 +2807,41 @@ RunService.RenderStepped:Connect(function()
 			end
 		end
 		CommandTip.Position = UDim2.new(0, xP, 0, yP)
+	end)
+	
+	task.spawn(function()
+		local function DisconnectClientEvent(RemoteName)
+			for i, v in ReplicatedStorage:GetDescendants() do
+				if v.Name == RemoteName then
+					for _, connection in getconnections(v.OnClientEvent) do
+						connection:Disconnect()
+					end
+				end
+			end
+		end
+		
+		if antitaser then
+			DisconnectClientEvent("PlayerTased")
+		end
+		if antiarrest then
+			DisconnectClientEvent("ClientArrested")
+		end
+		
+		if CFW then
+			local char = plr.Character
+			if char then
+				local humanoid = char:FindFirstChild("Humanoid")
+				if humanoid then
+					if humanoid.WalkSpeed == 5 then
+						humanoid.WalkSpeed = 16
+					end
+				end
+			end
+		end
+		
+		if ASBP then
+			plr:SetAttribute("BackpackEnabled", true)
+		end
 	end)
 end)
 
