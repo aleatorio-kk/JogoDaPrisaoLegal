@@ -2653,6 +2653,13 @@ task.spawn(function()
 					TipTextLabel.Text = ""
 					TipAliasLabel.Text = ""
 				end)
+			elseif v.Name == "" and v.Description == "" then
+				local Clone = template:Clone()
+				Clone.Parent = ui
+				Clone.LayoutOrder = i
+				Clone.Text = ""
+				Clone.Name = "space"
+				Clone.Visible = true
 			end
 		end
 	end
