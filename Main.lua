@@ -2583,8 +2583,7 @@ AddCommand("ak", {"ak47"}, function()
 	local plrpos = getRoot(plr.Character).CFrame
 	tpplayertopos(gunpos)
 	wait(.05)
-	GetItem("ak")
-	wait(.05)
+	repeat wait() GetItem("ak") until plr.Backpack:WaitForChild("AK-47")
 	tpplayertopos(plrpos)
 end)
 
@@ -2593,8 +2592,7 @@ AddCommand("remington", {"shotgun", "remington870"}, function()
 	local plrpos = getRoot(plr.Character).CFrame
 	tpplayertopos(gunpos)
 	wait(.05)
-	GetItem("remington")
-	wait(.05)
+	repeat wait() GetItem("remington") until plr.Backpack:WaitForChild("Remington 870")
 	tpplayertopos(plrpos)
 end)
 
@@ -2603,8 +2601,7 @@ AddCommand("m9", {"pistol"}, function()
 	local plrpos = getRoot(plr.Character).CFrame
 	tpplayertopos(gunpos)
 	wait(.05)
-	GetItem("m9")
-	wait(.05)
+	repeat wait() GetItem("m9") until plr.Backpack:WaitForChild("M9")
 	tpplayertopos(plrpos)
 end)
 
