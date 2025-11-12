@@ -2464,7 +2464,16 @@ end)
 local loopu
 AddCommand("kill", {}, function(speaker, args)
 	if not loopu then
-		local target = args[1]
+		local players = getPlayer(args[1], speaker)
+		local target
+		for i,v in pairs(players)do
+			task.spawn(function()
+				if Players[v].Name ~= speaker.Name then
+					target = v
+				end
+			end)
+		end
+		
 		if target then
 			local targetPlayer = game.Players:FindFirstChild(target)
 			if targetPlayer and targetPlayer.Character then
