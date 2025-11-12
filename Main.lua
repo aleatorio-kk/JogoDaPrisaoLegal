@@ -1,5 +1,39 @@
+--[[
+Todos os direitos reservados. ©aleatoriokk - GitHub do Proprietário Original: github.com/aleatorio-kk
+Não é permitido a republicação do mesmo.
+
+All rights reserved. ©aleatoriokk - Official Owner GitHub: github.com/aleatorio-kk
+No repost allowed.
+]]
+
 -- Completamente Open Source
 -- Si divirta muitu
+
+--[[
+
+Agradecimentos / Creditos:
+*https://github.com/EdgeIY/infiniteyield ou *https://github.com/EdgeIY:
+ - Maior parte das ideias de comando e algumas funções foram diretamente retiradas do source de lá.
+ - O funcionamento da maior parte dos comandos foi retirado a ideia de lá também (findcmd, addcmd, execcmd, etc)
+ - É um Universal Admin incrível, você deveria usar :)
+
+*Tiger Admin e Prizzlife:
+ - Infelizmente não tenho ideia de onde esses dois vieram originalmente, mas creio que sejam os dois melhores admins já criados pra Prison Life. :P
+ - A ideia de criar meu próprio sistema de script de adm pra essa bomba de jogo foi por causa que eu gostaria de criar algo novo, e também já era muito fã de criar script pra PL. (kill aura, tp, kill, etc)
+ - Esses dois foram o chute inicial pra ideia que eu precisava no início pra realmente começar a querer criar um admin pra isso.
+
+Special Thanks / Credits:
+*https://github.com/EdgeIY/infiniteyield or *https://github.com/EdgeIY:
+ - Most of commands ideas and some functions has been got directly from the source from IY.
+ - The commands ideas and ways to execute and create commands has been gotten from it too! (findcmd, addcmd, execcmd, etc)
+ - A pretty nice Universal Admin. (you should try too)
+
+*Tiger Admin & Prizzlife:
+ - Sadly, i don't know the official page or loadstring or GitHub from both, but i know these both are one of the bests already created admins for Prison Life :P
+ - The idea about create my own Admin Panel for that i had due i was thinking about create something new, and i already was a big fan from create some scripts for PL. (kill aura, to, kill, etc)
+ - These two admins got in my mind the first real kick for startup this project and share it with people.
+
+]]--
 
 -- [[ Aleatoriokk Hub ]] --
 local HttpService = game:GetService("HttpService")
