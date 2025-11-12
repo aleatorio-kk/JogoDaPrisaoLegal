@@ -294,11 +294,13 @@ local Cmds = {
 	{Name = "refresh", Description = "Refreshes your character."},
 	{Name = "whitelist", Description = "Adds a player to the whitelist. (Ignores multiple players commands. it only applies to 'kill all' or 'killaura', etc.)"},
 	{Name = "unwhitelist", Description = "Removes a player from the whitelist."},
+	{Name = "", Description = ""},
 	{Name = "killaura", Description = "Creates a aura that kills anyone touchs or get near."},
 	{Name = "unkillaura", Description = "Disables Kill Aura"},
 	{Name = "aurareload", Description = "Reloads the Kill Aura"},
 	{Name = "showaura", Description = "Shows the radius size from the aura."},
 	{Name = "killaurasize", Description = "Changes the Kill Aura Size. (Min. Size:1 - Max. Size:20)"},
+	{Name = "", Description = ""},
 	{Name = "fly", Description = "Makes you fly."},
 	{Name = "unfly", Description = "Disables the fly."},
 	{Name = "flyspeed", Description = "Changes the fly speed."},
@@ -318,11 +320,22 @@ local Cmds = {
 	{Name = "unspin", Description = "Stops spin."},
 	{Name = "speed", Description = "Changes your walk speed."},
 	{Name = "jump", Description = "Changes your jump power."},
+	{Name = "", Description = ""},
 	{Name = "antibring", Description = "Disables you to sit and don't be killed by exploiters with Cars."},
 	{Name = "unantibring", Description = "Enables you to sit normally."},
 	{Name = "sit", Description = "Makes your Character sit."},
+	{Name = "", Description = ""},
 	{Name = "savepos", Description = "Saves your current position."},
 	{Name = "loadpos", Description = "Loads the saved position. (Should save before load)"},
+	{Name = "", Description = ""},
+	{Name = "nexus", Description = "Teleports you to Nexus."},
+	{Name = "yard", Description = "Teleports you to Yard."},
+	{Name = "tower", Description = "Teleports you to Guard Tower."},
+	{Name = "guardsroom", Description = "Teleports you to Guards Room."},
+	{Name = "cells", Description = "Teleports you to Cells Room."},
+	{Name = "kitchen", Description = "Teleports you to Kitchen."},
+	{Name = "gateroom", Description = "Teleports you to Gate Room."},
+	{Name = "crimbase", Description = "Teleports you to Criminal Base."},
 }
 
 local function ExecuteCommand(commandStr, player, args)
@@ -2496,6 +2509,45 @@ AddCommand("kill", {}, function(speaker, args)
 		loopu:Disconnect()
 		loopu = nil
 	end
+end)
+
+function tpplayertopos(pos)
+	local root = getRoot(plr.Character)
+	if root then
+		root.CFrame = pos
+	end
+end
+
+AddCommand("nexus", {}, function()
+	tpplayertopos(CFrame.new(918, 100, 2365))
+end)
+
+AddCommand("yard", {}, function()
+	tpplayertopos(CFrame.new(778, 98, 2470))
+end)
+
+AddCommand("crimbase", {}, function()
+	tpplayertopos(CFrame.new(-855, 94, 2062))
+end)
+
+AddCommand("guardsroom", {}, function()
+	tpplayertopos(CFrame.new(830, 100, 2286))
+end)
+
+AddCommand("tower", {}, function()
+	tpplayertopos(CFrame.new(823, 126, 2586))
+end)
+
+AddCommand("gateroom", {}, function()
+	tpplayertopos(CFrame.new(503, 102, 2253))
+end)
+
+AddCommand("kitchen", {}, function()
+	tpplayertopos(CFrame.new(914, 100, 2228))
+end)
+
+AddCommand("cells", {}, function()
+	tpplayertopos(CFrame.new(917, 100, 2448))
 end)
 
 plr.Chatted:Connect(function(message)
