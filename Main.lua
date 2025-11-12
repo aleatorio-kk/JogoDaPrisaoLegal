@@ -1700,6 +1700,7 @@ function DoKAura(Size)
 	AuraBlock.Size = Vector3.new(Size, 20, Size) or Vector3.new(20, 20, 20)
 	AuraBlock.Transparency = 1
 	AuraBlock.CanCollide = false
+	AuraBlock.CanTouch = true
 	AuraBlock.Anchored = true
 	AuraBlock.CFrame = char.HumanoidRootPart.CFrame
 	AuraBlock.Parent = workspace
@@ -1777,16 +1778,13 @@ AddCommand("killaura", {"aura"}, function(speaker)
 		end)
 		
 		coolconnectionaura = AuraBlock.Touched:Connect(function(basepart)
-			if basepart:IsA("BasePart") then
-				if Players:GetPlayerFromCharacter(basepart.Parent) then
-					local player = Players:GetPlayerFromCharacter(basepart.Parent)
-					if player then
-						if player ~= speaker then
-							if getRoot(player.Character) and getRoot(plr.Character) then
-								if player.Character:FindFirstChild("Humanoid") and player.Character:FindFirstChild("Humanoid").Health > 0 then
-									PunchPlayer(player)
-								end
-							end
+			local players = Players:GetPlayers()
+			
+			for i, player in pairs(players) do
+				if basepart:IsDescendantOf(player.Character) then
+					if player ~= speaker then
+						if player.Character:WaitForChild("Humanoid").Health > 0 then
+							PunchPlayer(player)
 						end
 					end
 				end
@@ -1834,16 +1832,13 @@ AddCommand("aurareload", {"reloadaura", "reaura"}, function(speaker)
 		end)
 		
 		coolconnectionaura = AuraBlock.Touched:Connect(function(basepart)
-			if basepart:IsA("BasePart") then
-				if Players:GetPlayerFromCharacter(basepart.Parent) then
-					local player = Players:GetPlayerFromCharacter(basepart.Parent)
-					if player then
-						if player ~= speaker then
-							if getRoot(player.Character) and getRoot(plr.Character) then
-								if player.Character:FindFirstChild("Humanoid") and player.Character:FindFirstChild("Humanoid").Health > 0 then
-									PunchPlayer(player)
-								end
-							end
+			local players = Players:GetPlayers()
+
+			for i, player in pairs(players) do
+				if basepart:IsDescendantOf(player.Character) then
+					if player ~= speaker then
+						if player.Character:WaitForChild("Humanoid").Health > 0 then
+							PunchPlayer(player)
 						end
 					end
 				end
